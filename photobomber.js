@@ -11,10 +11,8 @@
   var allhashtags = new Object();
   var preloadarray = new Array();
   var shuffle = true;
- /* var preload1 = new Image();
-  preload1.src = "explosion.png?2"; */
   var preload2 = new Image();
-  preload2.src = "shuffleoff.gif?1";
+  preload2.src = "./shuffleoff.gif";
   var isnewgame = true;
   var skiplight = 1;
   var cnum = 0;
@@ -181,7 +179,7 @@ $("#skipdiv").html("End Game");
 	    
 
   	var allofit =
-  		'<img src="whiteline.gif" width="1" height="310" id="line" />' + fulltext[0] + '<div class="resultwrap"><input type="text" id="resulttext0" value="' + v1 + '" tabindex="1" /><div class="resultdiv" id="resultdiv0"><img id="results0" width="200" /></div><div id="photoby0" style="display: none;"></div></div>';
+  		'<img src="./whiteline.gif" width="1" height="310" id="line" />' + fulltext[0] + '<div class="resultwrap"><input type="text" id="resulttext0" value="' + v1 + '" tabindex="1" /><div class="resultdiv" id="resultdiv0"><img id="results0" width="200" /></div><div id="photoby0" style="display: none;"></div></div>';
   	if (answers[qnum].length > 2) {
   		allofit += fulltext[2] + '<div class="resultwrap"><input type="text" id="resulttext1" tabindex="2" value="' + v2 + '" /><div class="resultdiv" id="resultdiv1"><img id="results1" width="200" /></div><div id="photoby1" style="display: none;"></div></div>'
   	}
@@ -409,9 +407,9 @@ else {
   		var searchterm = encodeURIComponent(hashtag);
   		
   		if (flickrapi)
-  		var tagurl = "fcache/"+searchterm+".json";
+  		var tagurl = "./fcache/"+searchterm+".json";
   		else
-  		var tagurl = "gcache/"+searchterm+".json";
+  		var tagurl = "./gcache/"+searchterm+".json";
   		
 
   		$.getJSON(tagurl, function(data) {
@@ -749,10 +747,10 @@ $("#results" + num).on("load", function() {
   function onshuffle() {
 
   	if (shuffle == true) {
-  		$("#shuffleicon").attr("src", "shuffleoff.gif?1");
+  		$("#shuffleicon").attr("src", "./shuffleoff.gif");
   		shuffle = false;
   	} else {
-  		$("#shuffleicon").attr("src", "shuffleon.gif?1");
+  		$("#shuffleicon").attr("src", "./shuffleon.gif");
   		shuffle = true;
   	}
 
