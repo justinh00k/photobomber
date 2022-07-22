@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Photobomber</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<link rel="dns-prefetch" href="//ajax.googleapis.com"/>
+
+    <!--
+
+
+<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
+
+<link rel="shortcut icon" href="favicon.ico"/>
+
+<meta name="description" content="" />
+<meta name="keywords" content=""/>
+<meta name="author" content="justin hook"/>
+<meta name="robots" content="index, nofollow"/>
+
+<meta name="twitter:url" content="http://www.googlefeud.com/"/>
+<meta name="twitter:card" content="photo"/>
+<meta name="twitter:image" content="http://www.googlefeud.com/logo-tall4.jpg"/>
+<meta name="twitter:image:width" content="560"/>
+<meta name="twitter:image:height" content="335"/>
+<meta name="twitter:title" content="Try the world's most popular autocomplete game at GoogleFeud.com"/>
+<meta name="twitter:site" content="@justinhook"/>
+
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="http://www.googlefeud.com/"/>
+<meta property="og:title" content="Google Feud"/>
+<meta property="og:image" content="http://www.googlefeud.com/logo-tall4.jpg"/>
+<meta property="og:description" content="The free game where you try to guess how Google autocompletes popular searches."/>
+    
+    
+
+
+<link rel="dns-prefetch" href="//apis.google.com">
+
+-->
+
+    <style>
+        body {
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 300;
+            text-align: center;
+      
+        }
+        
+        img {
+        
+              -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Chrome/Safari/Opera */
+            -khtml-user-select: none;
+            /* Konqueror */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* IE/Edge */
+            user-select: none;
+            /* non-prefixed version, currently
+                                  not supported by any browser */
+        
+        }
+        
+        #header {
+            background-color: #000;
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        #header div {
+            display: inline-block;
+        }
+        
+        #header img {
+            display: inline-block;
+        }
+        
+        #logo {
+            margin: .5em 0;
+        }
+        
+        #creator {
+            margin: .5em 0;
+            padding-top: 5px;
+        }
+        
+        #main {
+            font-size: 3em;
+            text-align: center;
+            display: inline-block;
+            margin: 1em auto;
+            padding-left: 2em;
+            cursor: default;
+        }
+        
+        #main img {
+            vertical-align: middle;
+            max-height: 350px;
+          
+        }
+        
+        .resultwrap {
+            display: inline-block;
+            position: relative;
+            width: 200px;
+            margin: 0 20px;
+        }
+        /*
+.resultdiv:hover {
+
+opacity: 0.5;
+filter: alpha(opacity=50);
+
+}
+
+#resulttext0:hover + .resultdiv, #resulttext1:hover + .resultdiv, #resulttext2:hover + .resultdiv
+
+{
+
+opacity: .5;
+filter: alpha(opacity=50);
+
+}
+
+*/
+        
+        #resulttext0,
+        #resulttext1,
+        #resulttext2 {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            vertical-align: middle;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            font-size: 1em;
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 300;
+           
+            border: 0;
+            z-index: 10;
+            text-align: center;
+            outline: none;
+            cursor: text;
+        }
+        
+        #bombwrapper {
+            position: absolute;
+            top: 450px;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 2em;
+        }
+        
+        #bombwrapper img {
+            display: inline-block;
+        }
+        
+        #submit {
+            padding-left: 2em;
+            outline: none;
+        }
+        
+        #scoreboard {
+            color: #FFF;
+            font-size: 1.5em;
+            padding-bottom: .5em;
+            width: 450px;
+            margin: 0 auto;
+            text-transform: upper;
+        }
+        
+        #category {
+            margin-left: 2em;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        #footer {
+            background: black;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            font-size: .5em;
+        }
+        
+        #newgame {
+            display: none;
+        }
+        
+        #select {
+            display: none;
+            position: absolute;
+            top: 23px;
+            left: 105px;
+            background: #000;
+            color: #FFF;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            z-index: 99;
+            text-align: center;
+             width: 90px;
+        }
+        
+        #select li {
+            padding: 5px;
+            cursor: pointer;
+            cursor: hand;
+             border: thin white solid;
+        }
+        
+        #catname {
+            text-align: center;
+            width: 88px;
+            cursor: pointer;
+            cursor: hand;
+            padding:0; margin: 0;
+            border: thin white solid;
+        }
+        
+        #gameover {
+        	font-weight: bold;
+        	color: red;
+        	
+        	
+        }
+
+	#skip {
+	   font-size: .5em;
+	   margin-top: .5em;
+	 
+	}
+
+	.bombclass {
+	   cursor: move; 
+	   padding-left:.5em;
+	}
+        
+        input[type="text"]:disabled {
+            color: #000;
+        }
+        #subcat {text-align:left; padding-left: 1em; cursor: pointer; cursor: hand; color: green;  }
+        
+        .clickspan {cursor: pointer; cursor: hand; display: inline-block;}
+        
+    </style>
+
+</head>
+
+<body>
+
+    <div id="header">
+        <a href="http://www.googlefeud.com/photobomber"><img src="logo.gif" id="logo" alt="Photobomb" border="0" width="400" /></a><br />
+        <div id="scoreboard">
+            <div id="round"><b>ROUND:</b>
+                <div id="num">1</div>
+            </div>
+            <div id="category"><div id="gameover" style="display: none">Game Over</div><div id="catinfo">
+                <b>CATEGORY:</b>
+                <div id="catname" onclick="menuopen()"></div><div id="subcat" onclick="onshuffle()"><img src="shuffleon.gif" id="shuffleicon" width="20" height="20" /></div></div>
+                <ul id="select">
+                    <li id="cmovies" name="movies">Movies</li>
+                    <li id="cbooks" name="books">Books</li>
+                    <li id="cmusic" name="music">Music</li>
+                    <li id="cphrases" name="phrases">Phrases</li>
+                  
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="main">
+
+
+
+        <div id="clue"></div>
+
+    </div>
+
+    <div id="bombwrapper">
+        <div id="newgame"><span class="clickspan" onclick="newgame()">New game?</span></div>
+        <img src="bomb.png" width=64 id="bomb1" border=0 class="bombclass" />
+        <img src="bomb.png" width=64 id="bomb2" border=0 class="bombclass" />
+        <img src="bomb.png" width=64 id="bomb3" border=0 class="bombclass" />
+        <img src="bomb.png" width=64 id="bomb4" border=0 class="bombclass" />
+        <img src="bomb.png" width=64 id="bomb5" border=0 class="bombclass" />
+        <div id="skip"><span class="clickspan" onclick="skip()">Skip</span></div>
+    </div>
+
+    <div id="footer">
+        <a href="http://www.googlefeud.com" target="_blank">
+            <img src="fromthecreatorofgf.gif" id="creator" alt="From the creator of Google Feud." width="200" border="0" /><br />
+            &copy;2016
+        </a>
+    </div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+    <script type="text/javascript">
+    
+    function onshuffle() {
+    
+    
+       
+    if (shuffle == true)
+    {
+     $("#shuffleicon").attr("src","shuffleoff.gif");
+     shuffle = false;
+    }
+    else
+     {
+     $("#shuffleicon").attr("src","shuffleon.gif");
+     shuffle = true;
+     }
+   
+    }
+        function menuopen()
+
+        {
+
+            $("#select").show("fade", function() {
+
+                $("li").click(function() {
+                
+                
+                    selectedcat = $(this).attr("name");
+                    $("#catname").html(selectedcat);
+                   
+                    if (shuffle)
+                    onshuffle();
+                   
+                   
+                  
+
+                });
+
+                $(document).click(function() {
+                    $("#select").hide("fade", "100", function() {
+                 	    $("li").show();
+                 	   $("#c"+selectedcat).hide();
+                        $(document).unbind("click");
+                        $("li").unbind("click");
+                    });
+                });
+
+            });
+
+
+
+        }
+
+
+        // Initialization
+        var roundnum = 0;
+        var bombs = 5;
+        var count = 0;
+        var anum =  0;
+
+        var shuffle = true;
+        var preload1 = new Image();
+        preload1.src = "explosion.png";
+
+        var movies = [
+            ["the fox and the hound", "fox", "hound"],
+            ["the squid and the whale", "squid", "whale"],
+        /*  ["the beauty and the beast", "beauty", "beast"], */
+            ["the dark knight", "dark", "knight"],
+            ["the lord of the rings", "lord", "rings"],
+            ["The good, the bad and the ugly", "good", "bad", "ugly"],
+        /*    ["fight club", "fight", "club"], */
+        /*  ["The empire strikes back", "empire", "strikes", "back"], */
+            ["The squid and the whale", "squid", "whale"],
+         /*   ["city of god", "city", "god"], */
+            ["The silence of the lambs", "silence", "lambs"],
+        /*  ["back to the future", "back", "future"], */
+            ["The lion king", "lion", "king"],
+            ["return of the jedi", "return", "jedi"],
+            ["reservoir dogs", "reservoir", "dogs"],
+            ["a clockwork orange", "clockwork", "orange"],
+            ["taxi driver", "taxi", "driver"],
+       /*     ["toy story", "toy", "story"],  */
+            ["on the waterfront", "waterfront"]
+            
+        ];
+        var books = [
+            ["the prince and the pauper", "prince", "pauper"],
+         /* ["the sound and the fury", "sound", "fury"], */
+            ["the grapes of wrath", "grapes", "wrath"],
+            ["to the lighthouse", "lighthouse"],
+            ["invisible man", "invisible", "man"],
+            ["a passage to india", "passage", "india"],
+            ["animal farm", "animal", "farm"],
+            ["lord of the flies", "lord", "flies"],
+            ["the sun also rises", "sun", "rises"],
+            ["on the road", "road"],
+       /*   ["the catcher in the rye", "catcher", "rye"],  */
+            ["heart of darkness", "heart", "darkness"],
+       /*   ["the call of the wild", "call", "wild"], */
+            ["to kill a mockingbird", "kill", "mockingbird"],
+            ["life of pi","life","pi"]
+        ];
+        var music = [
+            ["light my fire", "light", "fire"],
+            ["american pie", "american", "pie"],
+            ["hotel california", "hotel", "california"],
+            ["when doves cry", "doves", "cry"],
+            ["moon dance", "moon", "dance"],
+            ["bridge over troubled water", "bridge", "troubled", "water"],
+            ["stairway to heaven", "stairway", "heaven"],
+            ["light my fire", "light", "fire"],
+            ["dancing queen", "dancing", "queen"],
+        /*  ["god only knows", "god", "knows"], */
+            ["the boxer", "boxer"],
+            ["tangled up in blue", "tangled", "blue"],
+            ["life on mars?", "life", "mars"]
+        ];
+        var phrases = [
+            ["cash cow", "cash", "cow"],
+        /*  ["clear the air", "clear", "air"], */
+        /*  ["cold shoulder", "cold", "shoulder"], */
+            ["spill the beans", "spill", "beans"],
+            ["in cold blood", "cold", "blood"],
+            ["don't rock the boat", "rock", "boat"],
+            ["burst your bubble", "burst", "bubble"],
+            ["burn that bridge", "burn", "bridge"],
+            ["my ears are burning", "ears", "burning"],
+            ["couch potato", "couch", "potato"],
+        /*    ["a shot in the dark", "shot", "dark"] */
+        ];
+
+
+        answers = allanswers = movies.concat(books, music, phrases);
+        answerkey = Array.apply(null, Array(allanswers.length)).map(Number.prototype.valueOf,0);
+               
+               
+        $(".bombclass").draggable({
+            revert: true
+        });
+
+
+        $('#clue').keypress(function(event) {
+            if (event.keyCode == 13) {
+                guess();
+
+            }
+        });
+
+        $("input").keyup(
+            function() {
+                setTransparency();
+            });
+
+
+
+        newround();
+
+        function newround() {
+
+            roundnum++;
+            greenlight = 0;
+
+            counter = counter0 = counter1 = counter2 = 1;
+            xstring = "";
+            
+            if (shuffle == true){
+            answers = allanswers;
+            selectedcat = "random";
+            }
+           
+           
+            
+            if (selectedcat == "movies")
+                answers = movies; 
+            if (selectedcat == "music")
+                { answers = music; anum+=movies.length+books.length;}
+            if (selectedcat == "books")
+               {  answers = books; anum+=movies.length; }
+            if (selectedcat == "phrases")
+              {  answers = phrases; anum+=music.length+books.length+movies.length;	 }
+                
+            qnum = Math.floor(Math.random() * answers.length);
+	    anum += qnum;
+	    
+
+	
+	
+	
+	
+	while (answerkey[anum] == 1)
+	{
+	qnum = Math.floor(Math.random() * answers.length);
+	anum = qnum;
+	if (selectedcat == "books")
+	anum+=movies.length;
+	
+	if (selectedcat == "music")
+	anum+=movies.length+books.length;
+	
+	if (selectedcat == "phrases")
+	anum+=music.length+books.length+movies.length;	
+	
+	}        
+	answerkey[anum] = 1; 
+	count++;
+	if (count==answerkey.length)
+	{ count = 0;    
+	  answerkey = Array.apply(null, Array(allanswers.length)).map(Number.prototype.valueOf,0);
+	}
+	
+	 
+          
+             
+                          
+            if (shuffle == true) {
+            	if (qnum<movies.length)
+          	{  $("#catname").html("Movies"); randomcat = "movies"; }
+          	if ((qnum>movies.length)&&(qnum<(movies.length+books.length)))
+          	{  $("#catname").html("Books"); randomcat = "books"; }
+          	if ((qnum>movies.length+books.length)&&(qnum<(movies.length+books.length+music.length)))
+          	 { $("#catname").html("Music"); randomcat = "music"; }
+          	if ((qnum>movies.length+books.length+music.length))
+          	{  $("#catname").html("Phrases");       randomcat = "phrases"; }    	  
+
+           }
+         
+            $("li").show();
+             $("#c"+selectedcat).hide();
+             console.log("qnum: "+qnum+" anum: "+anum+" selected cat:"+selectedcat);
+           
+            
+
+            for (i = 1; i < answers[qnum].length; i++) {
+                xstring += answers[qnum][i];
+                if ((i + 1) < answers[qnum].length)
+                    xstring += "|";
+            }
+            var re = new RegExp('(' + xstring + ')');
+            var fulltext = answers[qnum][0].split(re);
+
+            var allofit =
+                '<img src="whiteline.gif" width="1" height="350" />' + fulltext[0] + '<div class="resultwrap"><input type="text" id="resulttext0" tabindex="1" /><div class="resultdiv" id="resultdiv0"><img id="results0" width="200" /></div></div>';
+            if (answers[qnum].length > 2) {
+                allofit += fulltext[2] + '<div class="resultwrap"><input type="text" id="resulttext1" tabindex="2" /><div class="resultdiv" id="resultdiv1"><img id="results1" width="200" /></div></div>'
+            }
+            if (answers[qnum].length > 3) {
+                allofit += fulltext[4] + '<div class="resultwrap"><input type="text" id="resulttext2" tabindex="3" /><div class="resultdiv" id="resultdiv2"><img id="results2" width="200" /></div></div>'
+            }
+
+            if (fulltext[fulltext.length - 1] != answers[qnum][answers[qnum].length - 1])
+                allofit += fulltext[fulltext.length - 1];
+
+            allofit += '<img src="submitb.gif" width="70" height="70" border="0" id="submit" tabindex=4 onclick="guess()" />';
+
+
+            document.getElementById("clue").innerHTML = allofit;
+
+            for (i = 1; i < answers[qnum].length; i++) {
+                fetch(answers[qnum][i], (i - 1));
+            }
+
+            $("#results0").droppable({
+                drop: function(event, ui) {
+                    fetch(answers[qnum][1], 0);
+                    $(this).hide("explode", {
+                        pieces: 81
+                    }, 600, function() {
+                        $(this).show("fade", 1200)
+                    });
+                    ui.draggable.draggable('option', 'revert', false);
+                    ui.draggable.attr("src", "explosion.png");
+                    	ui.draggable.hide("fade",600, function(){                    
+                        ui.draggable.css("visibility", "hidden");
+                        ui.draggable.show();
+                        ui.draggable.css("left", "0");
+                        ui.draggable.css("top", "0");
+                        ui.draggable.attr("src", "bomb.png");
+                        bombs--;
+			if (bombs == 0)
+			$("#skip").hide();
+
+                    });
+                }
+            });
+
+              $("#results1").droppable({
+                drop: function(event, ui) {
+                    fetch(answers[qnum][2], 1);
+                    $(this).hide("explode", {
+                        pieces: 81
+                    }, 600, function() {
+                        $(this).show("fade", 1200)
+                    });
+                    ui.draggable.draggable('option', 'revert', false);
+                    ui.draggable.attr("src", "explosion.png");
+                    	ui.draggable.hide("fade",600, function(){                    
+                        ui.draggable.css("visibility", "hidden");
+                        ui.draggable.show();
+                        ui.draggable.css("left", "0");
+                        ui.draggable.css("top", "0");
+                        ui.draggable.attr("src", "bomb.png");
+                        bombs--;
+			if (bombs == 0)
+			$("#skip").hide();
+
+                    });
+                }
+            });
+
+              $("#results2").droppable({
+                drop: function(event, ui) {
+                    fetch(answers[qnum][3], 2);
+                    $(this).hide("explode", {
+                        pieces: 81
+                    }, 600, function() {
+                        $(this).show("fade", 1200)
+                    });
+                    ui.draggable.draggable('option', 'revert', false);
+                    ui.draggable.attr("src", "explosion.png");
+                    	ui.draggable.hide("fade",600, function(){                    
+                        ui.draggable.css("visibility", "hidden");
+                        ui.draggable.show();
+                        ui.draggable.css("left", "0");
+                        ui.draggable.css("top", "0");
+                        ui.draggable.attr("src", "bomb.png");
+                        bombs--;
+			if (bombs == 0)
+			$("#skip").hide();
+
+                    });
+                }
+            });
+
+            $("#resulttext0").focus(function() {
+                $("#resultdiv0").css("opacity", ".5");
+            });
+
+            $("#resulttext1").focus(function() {
+                $("#resultdiv1").css("opacity", ".5");
+            });
+
+            $("#resulttext2").focus(function() {
+                $("#resultdiv2").css("opacity", ".5");
+            });
+
+            $("#resulttext0,#resulttext1,#resulttext2").focusout(function() {
+                setTransparency();
+            });
+
+            $('input').bind('input propertychange', function() {
+
+                greenlight = 0;
+
+                if (answers[qnum].length == 2) {
+                    var ilength = $("#resulttext0").val();
+                    if (ilength.length > 0) {
+                        $("#submit").attr("src", "submit.gif");
+                        greenlight = 1;
+                    } else
+                        $("#submit").attr("src", "submitb.gif");
+                }
+
+                if (answers[qnum].length == 3) {
+                    var ilength = $("#resulttext0").val();
+                    var i2length = $("#resulttext1").val();
+
+                    if ((ilength.length > 0) && (i2length.length > 0)) {
+                        $("#submit").attr("src", "submit.gif");
+                        greenlight = 1;
+                    } else
+                        $("#submit").attr("src", "submitb.gif");
+                }
+
+
+                if (answers[qnum].length == 4) {
+                    var ilength = $("#resulttext0").val();
+                    var i2length = $("#resulttext1").val();
+                    var i3length = $("#resulttext2").val();
+
+                    if ((ilength.length > 0) && (i2length.length > 0) && (i3length.length > 0)) {
+                        $("#submit").attr("src", "submit.gif");
+                        greenlight = 1;
+                    } else
+                        $("#submit").attr("src", "submitb.gif");
+                }
+
+
+            });
+
+
+        }
+
+
+        function fetch(hashtag, num) {
+
+            if (num == 0) {
+                counter0++;
+                counter = counter0;
+            }
+            if (num == 1) {
+                counter1++;
+                counter = counter1;
+            }
+            if (num == 2) {
+                counter2++;
+                counter = counter2;
+            }
+
+            var searchterm = encodeURIComponent(hashtag);
+            var tagurl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=946727a95ef1f767c5ac1d63610c1f8b&tag_mode=all&tags=" + searchterm + "&text=" + searchterm + "&sort=relevance&content_type=1&per_page=10&format=json&jsoncallback=?";
+
+            $.getJSON(tagurl, function(data) {
+
+                var flickr = data["photos"]["photo"][counter];
+
+                var flurl = 'https://farm' + flickr["farm"] + '.staticflickr.com/' + flickr["server"] + '/' + flickr["id"] + '_' + flickr["secret"] + '_c.jpg';
+
+                $("#results" + num).attr("src", flurl);
+                
+                /* $("#results" + num).load(function(){
+                 
+                    $("#results" + num).show("fade", 1200)
+                   }
+			); */
+            });
+        };
+
+        function setTransparency() {
+
+            if (document.getElementById("resulttext0").value.length > 0)
+                document.getElementById("resultdiv0").style.opacity = "0.5";
+            else
+            if (!$("#resulttext0").is(":focus"))
+                document.getElementById("resultdiv0").style.opacity = "1";
+
+            if (answers[qnum].length > 2) {
+
+                if (document.getElementById("resulttext1").value.length > 0)
+                    document.getElementById("resultdiv1").style.opacity = "0.5";
+                else {
+                    if (!$("#resulttext1").is(":focus"))
+                        document.getElementById("resultdiv1").style.opacity = "1";
+                }
+            }
+
+            if (answers[qnum].length > 3) {
+
+                if (document.getElementById("resulttext2").value.length > 0)
+                    document.getElementById("resultdiv2").style.opacity = "0.5";
+                else {
+                    if (!$("#resulttext2").is(":focus"))
+                        document.getElementById("resultdiv2").style.opacity = "1";
+                }
+            }
+
+        }
+
+
+        function guess() {
+
+            if (greenlight == 0)
+                return;
+            $("#submit").attr("src", "submitb.gif");
+
+            greenlight = 0;
+
+            if (answers[qnum].length == 2) {
+                if (document.getElementById("resulttext0").value.toLowerCase() == answers[qnum][1])
+                    youwin();
+                else
+                    loseapoint();
+            }
+
+
+            if (answers[qnum].length == 3) {
+                if ((document.getElementById("resulttext0").value.toLowerCase() == answers[qnum][1]) && (document.getElementById("resulttext1").value.toLowerCase() == answers[qnum][2]))
+                    youwin();
+                else
+                    loseapoint();
+            }
+
+            if (answers[qnum].length == 4) {
+                if ((document.getElementById("resulttext0").value.toLowerCase() == answers[qnum][1]) && (document.getElementById("resulttext1").value.toLowerCase() == answers[qnum][2]) && (document.getElementById("resulttext2").value.toLowerCase() == answers[qnum][3]))
+                    youwin();
+                else
+                    loseapoint();
+            }
+
+        }
+
+        function loseapoint() {
+
+	bombs--;
+	if (bombs == 0)
+	$("#skip").hide();
+
+            if ($("#bomb5").css("visibility") != "hidden") {
+                $("#bomb5").hide("explode", function() {
+                    $("#bomb5").css("visibility", "hidden");
+                    $("#bomb5").css("display", "inline-block");
+                });
+            } else {
+                if ($("#bomb4").css("visibility") != "hidden") {
+                    $("#bomb4").hide("explode", function() {
+                        $("#bomb4").css("visibility", "hidden");
+                        $("#bomb4").css("display", "inline-block");
+                    });
+
+                } else {
+                    if ($("#bomb3").css("visibility") != "hidden") {
+                        $("#bomb3").hide("explode", function() {
+                            $("#bomb3").css("visibility", "hidden");
+                            $("#bomb3").css("display", "inline-block");
+                        });
+
+                    } else {
+                        if ($("#bomb2").css("visibility") != "hidden") {
+                            $("#bomb2").hide("explode", function() {
+                                $("#bomb2").css("visibility", "hidden");
+                                $("#bomb2").css("display", "inline-block");
+                            });
+
+                        } else {
+                            if ($("#bomb1").css("visibility") != "hidden") {
+                                $("#bomb1").hide("explode", function() {
+                                    $("#bomb1").css("visibility", "hidden");
+                                    $("#bomb1").css("display", "inline-block");
+                                });
+
+                            } else
+                                youlose();
+
+                        }
+                    }
+                }
+            }
+        }
+
+        function youwin() {
+
+            $("#num").html(roundnum + 1);
+
+
+            newround();
+
+        }
+
+        function youlose() {
+
+            greenlight = 0;
+
+            $("#gameover").show();
+            $("#catinfo").hide();
+
+            $("#resulttext0").val(answers[qnum][1]);
+            $("#resulttext0").prop('disabled', true);
+            if (answers[qnum].length > 2) {
+                $("#resulttext1").val(answers[qnum][2]);
+                $("#resulttext1").prop('disabled', true);
+            }
+            if (answers[qnum].length > 2) {
+                $("#resulttext2").val(answers[qnum][3]);
+                $("#resulttext2").prop('disabled', true);
+            }
+
+            $("#newgame").show("puff");
+
+        }
+
+        function newgame() {
+
+
+            roundnum = 0;
+            bombs = 5;
+
+            $("#gameover").hide();
+            $("#catinfo").show();
+
+            $("#newgame").hide("fade", function() {
+
+
+                $(".bombclass").show(function() {
+                    $(".bombclass").css("visibility", "visible");
+                    $(".bombclass").draggable({
+                        revert: true
+                    });
+                });
+
+                $("#skip").show();
+
+                $("#num").html("1");
+
+                newround();
+
+            });
+
+        }
+
+        function skip() {
+            roundnum--;
+            loseapoint();
+            newround();
+        }
+    </script>
+
+
+</body>
+
+</html>

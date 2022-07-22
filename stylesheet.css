@@ -1,0 +1,322 @@
+/* Thanks nystrdat for the sticky footer trick */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    font-size: 12px;
+    margin: 0 0 30px;
+    padding: 0;
+    border: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    text-align: center;
+}
+img, #skipdiv {
+
+    outline: none;
+
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    
+    -webkit-user-select: none;
+    /* Chrome/Safari/Opera */
+    
+    -khtml-user-select: none;
+    /* Konqueror */
+    
+    -moz-user-select: none;
+    /* Firefox */
+    
+    -ms-user-select: none;
+    /* IE/Edge */
+    
+}
+
+#skipdiv {height: 35px; }
+
+#header {
+    background-color: #000;
+    width: 100%;
+    display: block;
+    text-transform: uppercase;
+    height: 102px;
+}
+#logo {
+    margin: 0 0 .5em 0;
+    width: 95%;
+    max-width: 400px;
+    display: inline-block;
+}
+#main {
+    font-size: 3em;
+    text-align: center;
+    height: 320px;
+    display: inline-block;
+    cursor: default;
+    margin-top: .3em;
+    margin-bottom: .5em;
+    text-transform: lowercase;
+}
+#main img {
+    vertical-align: middle;
+    max-height: 310px;
+}
+.resultwrap {
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    margin: 0 20px;
+    overflow: visible;
+}
+
+#resulttext0,
+#resulttext1,
+#resulttext2 {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    font-size: .9em;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    text-transform: lowercase;
+    font-weight: 300;
+    border: 0;
+    z-index: 10;
+    text-align: center;
+    outline: none;
+    cursor: text;
+}
+#bombwrapper {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    display: none;
+}
+#bombwrapper img {
+    display: inline-block;
+}
+#scoreboard {
+    color: #CCC;
+    font-size: 1.4em;
+    padding-bottom: .5em;
+    text-align: left;
+    width: 80%;
+    max-width: 350px;
+    display: inline-block;
+}
+#scoreboard div {
+    display: inline-block;
+    
+}
+#category {
+    position: relative;
+    float: right;
+    margin-top: -1px;
+    margin-right: 3px;
+    
+}
+#footer {
+    background: black;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    padding: 5px 0;
+    font-size: .8em;
+    color: #999;
+    height: 35px;
+}
+#select {
+    display: none;
+    position: absolute;
+    background: #000;
+    list-style-type: none;
+    padding: 0;
+    margin: 1px 0 0 -1px;
+    z-index: 99;
+    font-weight: bold;
+}
+#select li {
+    padding: 2px 0;
+    cursor: pointer;
+    
+    border: thin #CCC solid;
+    border-top: none;
+    width: 115px;
+    
+}
+#catmenu { width: 115px;
+    cursor: pointer;
+    
+    margin-left: 3px;
+    border: thin #CCC solid;
+    font-weight: bold;
+    }
+#catname {
+    text-align: center;
+    padding-left: 2px;
+    width:90px;
+}
+#gameover {
+    font-weight: bold;
+    color: red;
+}
+#correct {
+    font-weight: bold;
+    color: limegreen;
+   
+}
+#skip {
+    font-size: 1.5em;
+    margin-top: .5em;
+    margin-bottom: 2em;
+    text-transform: uppercase;
+    /* display: none; */
+}
+.bombclass {
+    cursor: move;
+    width: 55px;
+    height: 55px;
+    padding-left: .5em;
+}
+input[type="text"]:disabled {
+    color: #000;
+}
+#subcat {
+    text-align: left;
+    padding-left: .1em;
+    cursor: pointer;
+   
+    color: green;
+}
+.clickspan {
+    cursor: pointer;
+  
+    display: inline-block;
+}
+#shuffleicon {
+    vertical-align: middle;
+    width: 20px;
+    padding-left: .1em;
+    margin-top: -3px;
+}
+#cpspan {
+    margin-bottom: -.3em;
+    
+}
+.highlight {
+    box-shadow: 0 0 20px black;
+}
+
+#points {
+    font-size: 240px;
+    width: 100%;
+    padding-top: 20px;
+    text-align: center;
+    display: none;
+    font-weight: bold;
+    color: #000;
+    position: absolute;
+    z-index: 99;
+}
+.recenter {text-align: center; width: 95px; }
+
+#footer div {margin-right: .5em; display: inline-block; }
+#instructions {margin:-.5em 0 3em 0; font-size: .8em;  /* color: #0062dd; */}
+#instructions img {display: block; width:100px; margin: 0 auto; padding-top: .5em; }
+
+.addthis_sharing_toolbox {padding-bottom: 3em; }
+
+#r {font-weight: bold; margin-left: .2em; /* color: #0062dd; */}
+#catinfo {margin-top: -2px; }
+#arrow {width: 15px; right: 2px; position: relative; top: -1px; color: #CCC;}
+
+a:link, a:visited, a:hover, a:active { color: #999; }
+a:link {text-decoration: none;}
+a:hover {text-decoration: none;}
+#photoby0, #photoby1, #photoby2 
+{
+position: absolute;
+width: 100%;
+text-align: right;
+font-size: .3em;
+}
+
+/*
+#catmenu {color: #ff0084; }
+*/
+
+#cspan{ display: inline-block; position: relative; bottom: 6px; left: 1px;}
+
+#creator {height: 20px; }
+
+
+@media screen and (max-width: 890px) {
+
+    #body {margin: 0 0 40px; }
+    
+    #header {
+        position: fixed;
+        z-index: 95;
+        top: 0;
+        left: 0;
+        height: 92px;
+    }
+    #main {
+        padding-top: 100px;
+        height: auto;
+        min-height: 320px;
+        font-size: 2em;
+
+    }
+    #bombwrapper {
+        position: relative;
+    }
+    #footer {
+        position: absolute;
+        height: 50px;
+    }
+    
+    .resultwrap {
+        display: block;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        min-height: 100px;
+    }
+    .bombclass {
+        width: 40px;
+        height: 40px;
+    }
+    #line {
+        display: none;
+    }
+  #footer div {display: inline; }
+    #scoreboard {
+        font-size: 1.2em;
+        width: 95%;
+    }
+    #points {
+        margin-top: 120px;
+    }
+    #catmenu {
+        width: 86px;
+    }
+    #select li {
+        width: 86px;
+    }
+    #instructions {padding: 0 20px; }
+    #catname {width: 65px; padding-left: 3px; }
+    #arrow {width: 12px; }
+    .recenter {width: 72px; }
+   #skip {margin-bottom: 3em;}
+}

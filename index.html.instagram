@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta charset="UTF-8">      
+      <title>Photobomber</title>
+
+<!--
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
+<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
+
+<link rel="shortcut icon" href="favicon.ico"/>
+
+<meta name="description" content="" />
+<meta name="keywords" content=""/>
+<meta name="author" content="justin hook"/>
+<meta name="robots" content="index, nofollow"/>
+
+<meta name="twitter:url" content="http://www.googlefeud.com/"/>
+<meta name="twitter:card" content="photo"/>
+<meta name="twitter:image" content="http://www.googlefeud.com/logo-tall4.jpg"/>
+<meta name="twitter:image:width" content="560"/>
+<meta name="twitter:image:height" content="335"/>
+<meta name="twitter:title" content="Try the world's most popular autocomplete game at GoogleFeud.com"/>
+<meta name="twitter:site" content="@justinhook"/>
+
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="http://www.googlefeud.com/"/>
+<meta property="og:title" content="Google Feud"/>
+<meta property="og:image" content="http://www.googlefeud.com/logo-tall4.jpg"/>
+<meta property="og:description" content="The free game where you try to guess how Google autocompletes popular searches."/>
+    
+    
+<link rel="dns-prefetch" href="//ajax.googleapis.com"/>
+
+<link rel="dns-prefetch" href="//apis.google.com">
+
+-->
+
+</head>
+
+<body>
+
+<a href="https://api.instagram.com/oauth/authorize/?client_id=dc92cf50f42e4bfa8f1e9448a6753fba&redirect_uri=http%3A%2F%2Fwww.googlefeud.com%2Fphotobomber&response_type=code">begin game</a>
+<br />
+<a href="javascript:fetch();">fetch nofilter image</a>
+<br />
+<div id="results"></div>
+
+<script type="text/javascript">
+
+ 
+<?php 
+
+$code = $_GET["code"];
+
+if ($code == true)
+{
+
+echo 'var instagram =';
+
+$ch = curl_init();
+
+curl_setopt($ch, CURLOPT_URL,"https://api.instagram.com/oauth/access_token");
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, "client_id=dc92cf50f42e4bfa8f1e9448a6753fba&client_secret=0e1a5e19dde64c47bc6cbfedf3c27b7a&grant_type=authorization_code&redirect_uri=http://www.googlefeud.com/photobomber&code=".$code."&scope=public_content");
+
+curl_exec ($ch);
+curl_close ($ch); 
+
+echo ";";
+
+}
+
+?>
+
+function fetch() {
+
+var tagurl = "https://api.instagram.com/v1/tags/coffee/media/recent?access_token="+instagram.access_token+"&callback=?";
+
+$.getJSON( tagurl, function(data) {document.getElementById("results").innerhtml = data.toString();} );
+
+}
+
+</script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+</body>
+
+</html>

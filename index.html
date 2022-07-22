@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>Photobomber - Solve the puzzle using the top tagged photos on Flickr.</title>
+	
+	<link rel="stylesheet" href="stylesheet.css?66" type="text/css" />
+	<link rel="shortcut icon" href="favicon.png?1" />
+	<link rel="dns-prefetch" href="//ajax.googleapis.com" />
+	
+	<meta charset="UTF-8">
+	<meta name="robots" content="index, nofollow" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="theme-color" content="black" />
+	
+	<meta name="description" content="Solve the puzzle using the top tagged photos on Flickr." />
+	<meta name="keywords" content="photobomber,flickr,game,google feud,photo bomber,photobomb,api" />
+	<meta name="author" content="justin hook" />
+	
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="http://www.photobomber.net"/>
+	<meta property="og:title" content="Photobomber"/>
+	<meta property="og:image" content="http://www.photobomber.net/logo-tall.gif"/>
+	<meta property="og:description" content="Solve the puzzle using the top tagged photos on Flickr."/>
+
+	<meta name="twitter:card" content="summary_large_image"/>
+	<meta name="twitter:creator" content="@justinhook"/>
+	<meta name="twitter:image" content="http://www.photobomber.net/logo-tall.gif"/>
+	<meta name="twitter:title" content="Photobomber"/>
+	<meta property="twitter:description" content="Solve the puzzle using the top tagged photos on Flickr."/>
+	
+<!--
+
+Thanks to:
+- furf for jQuery Touch Punch
+- nystrdat for the sticky footer
+- jsbeautifier.org for the beautification
+- SOMEONE for the bomb icon
+
+-->
+
+</head>
+
+<body>
+<div style="position: absolute; left: -2000px;">Photobomber: The free web game where you solve word puzzles using the top tagged photos on Flickr. As featured on The AV Club. From the creator of Google Feud.</div>
+
+	<div id="header">
+		<div id="logodiv"><a href="http://photobomber.net"><img src="logo4.gif?0" id="logo" alt="Photobomber" /></a></div>
+		<div id="scoreboard">
+			<div id="round">Solved
+				<div class="num" id="r">0</div>
+			</div>
+			<div id="category">
+				<div id="gameover" style="display: none;">Game Over</div>
+				<div id="correct" style="display: none;">Correct!</div>
+				<div id="catinfo">
+					Category
+					<div id="catmenu">
+						<div id="catname" onclick="menuopen()"></div>
+						<div id="arrow" onclick="menuopen()">&#9661;</div>
+						<ul id="select">
+							<li id="cmovies" data-name="movies"><div class="recenter">Movies</div></li>
+							<li id="cbooks" data-name="books"><div class="recenter">Books</div></li>
+							<li id="cmusic" data-name="music"><div class="recenter">Music</div></li>
+							<li id="cphrases" data-name="phrases"><div class="recenter">Phrases</div></li>
+
+						</ul>
+					</div>
+
+					<div id="subcat" onclick="onshuffle()"><img src="shuffleon.gif?1" alt="Random" id="shuffleicon" /></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+        <div class="num" id="points">0</div>
+	
+        <div id="main">
+
+		<div id="clue"></div>
+
+	</div>
+
+
+	<div id="bombwrapper">
+
+		<img src="bomb.png" id="bomb1" class="bombclass" alt="Bomb" />
+		<img src="bomb.png" id="bomb2" class="bombclass" alt="Bomb" />
+		<img src="bomb.png" id="bomb3" class="bombclass" alt="Bomb" />
+		<img src="bomb.png" id="bomb4" class="bombclass" alt="Bomb" />
+		<!-- <img src="bomb.png" id="bomb5" class="bombclass" alt="Bomb" /> -->
+
+	</div>
+
+	<div id="skip">
+	<div id="instructions">Solve the puzzle using the top tagged photos on <img alt="Flickr" src="flickr.gif" /></div>
+		<div class="clickspan" tabindex="4" id="skipdiv" onclick="skip()">Start</div>
+	</div>
+	
+	
+	<div class="addthis_sharing_toolbox"></div>
+
+
+	<div id="footer">
+
+
+		<div id="cspan"><a href="http://www.googlefeud.com" target="_blank">From the maker of </a></div><a href="http://www.googlefeud.com" target="_blank"><img src="googlefeud.gif?0" id="creator" alt="Google Feud." /></a><br /><div id="copyright">&copy; 2016 <a href="mailto:justinhook@gmail.com">justin hook</a> |</div><div id="switch" onclick="fswitch()">This site uses the Flickr API, but is not endorsed or certified by Flickr.</div>
+
+	</div>
+
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="jquery.ui.touch-punch.min.js"></script>
+
+	<script type="text/javascript" src="puzzles.js"></script>
+
+	<script type="text/javascript" src="photobomber.js"></script>
+
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4e5306c3248f8697" async="async"></script>
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0C1R7KBXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q0C1R7KBXX');
+</script>
+
+</body>
+
+</html>
